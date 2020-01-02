@@ -18,12 +18,13 @@ body {
         margin-top: 10%;
 }
 
-.loading {
+.error {
         width: 50%;
         margin: auto;
         margin-top: 10%;
         text-align: center;
-        font-size: large;
+        color: red;
+        animation: shake 1s infinite;
 }
 
 .navigation {
@@ -77,7 +78,7 @@ select option:disabled {
         -moz-float-edge: right;
 }
 
-.btnact {
+.activeButton {
         background-color: green;
         border: none;
         color: white;
@@ -87,7 +88,7 @@ select option:disabled {
         font-size: 1em;
 }
 
-.btndis {
+.disabledButton, [type="button"]:disabled {
         background-color: rgb(128, 189, 153);
         border: none;
         color: rgb(255, 255, 255);

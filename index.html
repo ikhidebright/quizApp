@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="index.js"></script>
+        <link rel="stylesheet" href="index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Quiz App</title>
+</head>
+
+<body>
+
+        <div class="navigation">
+                <nav>
+                        <div class="container">
+                                <h3>Quiz Masters</h3>
+                        </div>
+                </nav>
+
+
+                <!--Selectors start-->
+                <div class='selectquiz'>
+
+                        <div class="container">
+
+                                <select name="category" id="category">
+
+                                        
+                                        <option selected disabled>Category</option>
+
+                                        <option value="9">General Knowledge</option>
+
+                                        <option value="10">Entertainment: Books</option>
+
+                                        <option value="11">Entertainment: Film</option>
+
+                                        <option value="12">Entertainment: Music</option>
+
+                                        <option value="13">Entertainment: Musicals & Theatres</option>
+
+                                        <option value="14">Entertainment: Television</option>
+
+                                        <option value="15">Entertainment: Videos Games</option>
+
+                                        <option value="16">Entertainment: Board Games</option>
+
+                                        <option value="29">Entertainment: Comics</option>
+
+                                        <option value="31">Entertainment: Japanese Anime & Manga</option>
+
+                                        <option value="32">Entertainment: Cartoon & Anaimations</option>
+
+                                        <option value="30">Science: Gadgets</option>
+
+                                        <option value="17">Science & Nature</option>
+
+                                        <option value="18">Science: Computers</option>
+
+                                        <option value="19">Science: Mathematies</option>
+
+                                        <option value="20">Mythology</option>
+
+                                        <option value="21">Sports</option>
+
+                                        <option value="22">Geography</option>
+
+                                        <option value="23">History</option>
+
+                                        <option value="24">Politics</option>
+
+                                        <option value="25">Art</option>
+
+                                        <option value="26">Celebrities</option>
+
+                                        <option value="27">Animals</option>
+
+                                        <option value="28">Vehicles</option>
+
+                                </select>
+
+                                <select name="difficulty" id="difficulty">
+
+                                        <option selected disabled>Difficulty</option>
+
+                                        <option value="easy">Easy</option>
+
+                                        <option value="medium">Medium</option>
+
+                                        <option value="hard">Hard</option>
+
+                                </select>
+
+                                <input class='btndis' type="button" value="Start Quiz" id='sub' disabled>
+
+                        </div>
+                </div>
+        </div>
+        <!--Selectors end-->
+
+        <div class="container topSpace">
+
+                <h3 id='timeUI'></h3>
+                <br>
+                <br>
+                <div class="questions">
+
+
+                </div>
+                
+                <p class='rules topSpace'>
+                        To take a Quiz, select and choose Quiz category and difficulty level then click on the Start Quiz button
+                </p>
+        </div>
+</body>
+
+</html>

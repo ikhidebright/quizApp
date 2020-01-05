@@ -93,25 +93,46 @@
                                 </select>
 
                                 <input class='btndis' type="button" value="Start Quiz" id='sub' disabled>
+                                <input class='btncheck' type="button" value="Submit Answers" id='checkanswer'>
 
                         </div>
                 </div>
+                <div class="container"> <h3 id='timeUI'></h3></div>
         </div>
         <!--Selectors end-->
-
         <div class="container topSpace">
-
-                <h3 id='timeUI'></h3>
                 <br>
                 <br>
-                <div class="questions"></div>
-                
+                <div class="testArea"></div>
                 <p class='rules topSpace'>
-                        To take a Quiz, select and choose Quiz category and difficulty level then click on the Start Quiz button
+                To take a Quiz, select and choose Quiz category and difficulty 
+                level then click on the Start Quiz button
                 </p>
                 <p class="error"></p>
         </div>
+<div class="modalBody">
+        <div class="modalContent">
+              <h1 class = "testresultsheading">Test Results</h1>
+              <div class="modalMainCon">
+                      <p class="up"></p>
+        <h4 class = "catShow"></h4>
+        <br>      
+        <h4 class = "diffShow"></h4>
+        <br>        
+        <h4 class = "timespent"></h4>
+        <br>
+        <h4 class = "">Total question: 50</h4> 
+        <br>
+        <h4 class = "">Questions answered: </h4>
+        <br>
+        <h4 class = "">Questions answered correctly: </h4>
+        <br>
+        <h4 class = "">Remark: </h4>
+        <br>
+        <input type="button" value="Show correct answers" class="correctAnswers"/>
+</div>
+        </div>
+</div>
         <script src="index.js"></script>
 </body>
-
 </html>

@@ -227,5 +227,9 @@ select option:disabled {
 
 li {
         list-style-type: none;
-        margin: 2vmin;
+        margin-bottom: 2vmin;
+}
+
+.dynamicQuestionHeading {
+        margin-bottom: 2vmin;
 }

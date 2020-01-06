@@ -39,7 +39,7 @@ const timer = (minutes) => {
                         timeUI.innerHTML = tt + " minutes left";
                         timeSpent.push(tt);
                 }
-        }, 1000)
+        }, 60000)
 
         if (checkForSubmitButtonClicked === true) {
                 clearInterval(looper);
@@ -101,7 +101,8 @@ const testAreaFunction = () => {
                                 optionsArray.push(obj[key]);
                         } else if (key === "question") {
                                 let h = document.createElement("h5");
-                                h.appendChild(document.createTextNode(obj[key]))
+                                h.className = 'dynamicQuestionHeading'
+                                h.innerHTML =obj[key];
                                 testArea.appendChild(h);
                         } else if (key === "correct_answer") {
                                 optionsArray.push(obj[key]);
@@ -111,8 +112,9 @@ const testAreaFunction = () => {
                 }
                 optionsArray.flat().forEach((item) => {
                         let li = document.createElement("li");
-                        li.appendChild(document.createTextNode(item));
-                        testArea.appendChild(li);
+                        li.innerHTML = `<input type="radio" name=${optionsArray.flat()} id=${item} />
+                                        <label for=${item} id=${item}>${item}</label>`
+                                        testArea.appendChild(li);
                 })
                 // console.log(optionsArray.flat())
         })

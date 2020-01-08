@@ -19,6 +19,7 @@ body {
         float: right;
         position: fixed;
         font-size: 0.8em;
+        width: 20%;
         -moz-float-edge: right;
         margin: 20% 2vmin 0 0;
 }
@@ -28,6 +29,7 @@ body {
         position: fixed;
         -moz-float-edge: right;
         color: red;
+        width: 20%;
         display: block;
         margin: 20% 2vmin 0 0;
         animation: blink 600ms infinite;
@@ -162,7 +164,7 @@ select option:disabled {
         color: white;
         height: 2em;
         text-align: center;
-        width: 60%;
+        width: 70%;
         transition-duration: 600ms;
         font-size: 1em;
 }
@@ -259,6 +261,7 @@ select option:disabled {
 .testArea {
         width: 80%;
         margin-top: 10%;
+        transition-duration: 700ms;
 }
 
 li {
@@ -271,7 +274,7 @@ li {
 }
 
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 991px) {
         .modalContent {
                 background-color: white;
                 margin: 0 auto;
@@ -297,16 +300,16 @@ li {
                 float: right;
                 position: fixed;
                 -moz-float-edge: right;
-                margin-top: 2%;
-                font-size: 2em;
+                margin-top: 1%;
+                font-size: 1.5em;
         }
         
         .timeUpUI {
                 float: right;
                 position: fixed;
                 -moz-float-edge: right;
-                margin-top: 2%;
-                font-size: 2em;
+                margin-top: 1%;
+                font-size: 1.5em;
                 color: red;
                 display: block;
                 animation: blink 600ms infinite;
@@ -440,7 +443,7 @@ li {
                 border: none;
                 color: white;
                 height: 2em;
-                width: 30%;
+                width: 40%;
                 transition-duration: 600ms;
                 font-size: 1em;
         }
@@ -530,6 +533,16 @@ li {
         .testArea {
                 margin-top: -2%;
                 width: 70%;
+                -moz-animation: fadein 2s;
+                -webkit-animation: fadein 2s;
+                -o-animation: fadein 2s;
+                -ms-zoom-animation: fadein 2s;
+                animation: fadein 2s;
+        }
+
+        @keyframes fadein {
+                from {opacity: 0;}
+                to {opacity: 1;}
         }
         
         li {

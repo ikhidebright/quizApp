@@ -16,6 +16,7 @@ let testArea = document.querySelector(".testArea");
 let checkCorrectAnswer = document.querySelector(".correctAnswers");
 let timeSpent = [];
 let timeGiven = 0;
+let numberOfQuestions = 0;
 let checkForSubmitButtonClicked = false;
 
 //dynamic timer count down
@@ -47,6 +48,16 @@ const timer = (minutes) => {
         }
 }
 
+// update number of ques
+const updateNumberOfQuestions = () => {
+        if (diffLevel[0] === "easy") {
+                numberOfQuestions = 15;
+        } else if (diffLevel[0] === "medium") {
+                numberOfQuestions = 30;
+        } else if (diffLevel[0] === "hard") {
+                numberOfQuestions = 45;
+        }
+}
 
 // get selected difficulty option
 difficulty.addEventListener("change", function () {
@@ -54,6 +65,7 @@ difficulty.addEventListener("change", function () {
         checkForTwoSelection.push(diff);
         diffLevel = [];
         diffLevel.push(diff)
+        updateNumberOfQuestions();
         setInterval(buttonUpdate(), 400)
 }, false);
 
@@ -64,6 +76,7 @@ category.addEventListener("change", function () {
         checkForTwoSelection.push(cat);
         diffCat = [];
         diffCat.push(cat);
+        updateNumberOfQuestions();
         setInterval(buttonUpdate(), 400)
 }, false);
 
@@ -86,10 +99,46 @@ const computeResults = () => {
         modalBody.style.display = 'block';
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
         checkForSubmitButtonClicked = true;
+        updateCatDiffOnCheckResults();
+
 }
 // assign computeResults function to checkanswersbutton
 
 checkanswerbutton.addEventListener("click", computeResults);
+
+
+// getting data from api
+const apiCall = (numberOfQuestions, cat, diff) => {
+        let api = `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${cat}&difficulty=${diff}&type=multiple`
+        fetch(api)
+                .then((res) => {
+                        document.querySelector(".error").style.display = "none";
+                        document.querySelector(".rules").textContent = "Loading...";
+                        res.json().then((data) => {
+                                document.querySelector(".error").style.display = "none";
+                                document.querySelector(".rules").style.display = "none";
+                                apiResults.push(data);
+                                // console.log(data.results)
+                                // showQuestions();
+                                testAreaFunction();
+                                inputBox();
+                                updateTime();
+                        })
+                }).catch((err) => {
+                        error.push(err.message);
+                        loading();
+                        thereIsError();
+                })
+}
+
+
+//update category and difficulty levels on results page
+const updateCatDiffOnCheckResults = () => {
+        document.querySelector(".catShow").innerHTML = "Question Category: " + apiResults[0].results[0].category;
+        document.querySelector(".diffShow").innerHTML = "Difficulty Level: " + apiResults[0].results[0].difficulty;
+        document.querySelector(".totalQues").innerHTML = "Total question: " + numberOfQuestions;
+
+}
 
 
 //update test area
@@ -136,43 +185,9 @@ const testAreaFunction = () => {
                 })
                 // console.log(optionsArray.flat())
         })
-        updateCatDiffOnCheckResults();
         document.querySelector("#checkanswer").style.display = "block";
         document.querySelector("#sub").style.display = "none";
 }
-
-//update category and difficulty levels on results page
-const updateCatDiffOnCheckResults = () => {
-        document.querySelector(".catShow").innerHTML = "Question Category: " + apiResults[0].results[0].category;
-        document.querySelector(".diffShow").innerHTML = "Difficulty Level: " + apiResults[0].results[0].difficulty;
-
-}
-
-
-// getting data from api
-const apiCall = (cat, diff) => {
-        let api = `https://opentdb.com/api.php?amount=5&category=${cat}&difficulty=${diff}&type=multiple`
-        fetch(api)
-                .then((res) => {
-                        document.querySelector(".error").style.display = "none";
-                        document.querySelector(".rules").textContent = "Loading...";
-                        res.json().then((data) => {
-                                document.querySelector(".error").style.display = "none";
-                                document.querySelector(".rules").style.display = "none";
-                                apiResults.push(data);
-                                // console.log(data.results)
-                                // showQuestions();
-                                testAreaFunction();
-                                inputBox();
-                                updateTime();
-                        })
-                }).catch((err) => {
-                        error.push(err.message);
-                        loading();
-                        thereIsError();
-                })
-}
-
 
 // update static Time and set count down minutes parameter
 const updateTime = (error) => {
@@ -180,14 +195,17 @@ const updateTime = (error) => {
                 document.querySelector("#timeUI").innerHTML = 20 + " min left";
                 timer(20);
                 timeGiven = 20;
+                numberOfQuestions = 15;
         } else if (diffLevel[0] === "medium" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 40 + " min left";
+                document.querySelector("#timeUI").innerHTML = 30 + " min left";
                 timer(30);
                 timeGiven = 30;
+                numberOfQuestions = 30;
         } else if (diffLevel[0] === "hard" && !(error)) {
                 document.querySelector("#timeUI").innerHTML = 35 + " min left";
                 timer(35);
                 timeGiven = 35;
+                numberOfQuestions = 45
         }
 }
 
@@ -226,11 +244,14 @@ const thereIsError = () => {
 submitButton.addEventListener("click", () => {
         //set  parameters for the api to use
         if (diffLevel[0] === "easy") {
-                apiCall(diffCat[0], diffLevel[0]);
+                apiCall(numberOfQuestions, diffCat[0], diffLevel[0]);
+                updateNumberOfQuestions();
         } else if (diffLevel[0] === "medium") {
-                apiCall(diffCat[0], diffLevel[0]);
+                apiCall(numberOfQuestions, diffCat[0], diffLevel[0]);
+                updateNumberOfQuestions();
         } else if (diffLevel[0] === "hard") {
-                apiCall(diffCat[0], diffLevel[0]);
+                apiCall(numberOfQuestions, diffCat[0], diffLevel[0]);
+                updateNumberOfQuestions();
         }
 })
 

@@ -124,6 +124,7 @@ select option:disabled {
         display: block;
         float: right;
         display: none;
+        width: 40%;
         -moz-float-edge: right;
 }
 
@@ -131,7 +132,7 @@ select option:disabled {
         float: right;
         display: none;
         -moz-float-edge: right;
-        width: 30%;
+        width: 40%;
 }
 
 .btncheck2 {
@@ -150,6 +151,7 @@ select option:disabled {
         color: white;
         height: 2em;
         width: 30%;
+        text-align: center;
         transition-duration: 600ms;
         font-size: 1em;
 }
@@ -159,7 +161,8 @@ select option:disabled {
         border: none;
         color: white;
         height: 2em;
-        width: 30%;
+        text-align: center;
+        width: 60%;
         transition-duration: 600ms;
         font-size: 1em;
 }
@@ -295,6 +298,7 @@ li {
                 position: fixed;
                 -moz-float-edge: right;
                 margin-top: 2%;
+                font-size: 2em;
         }
         
         .timeUpUI {
@@ -302,6 +306,7 @@ li {
                 position: fixed;
                 -moz-float-edge: right;
                 margin-top: 2%;
+                font-size: 2em;
                 color: red;
                 display: block;
                 animation: blink 600ms infinite;
@@ -406,6 +411,7 @@ li {
                 float: right;
                 display: none;
                 -moz-float-edge: right;
+                width: 16%;
         }
         
         .btncheck2 {
@@ -521,6 +527,7 @@ li {
         
         
         .testArea {
+                margin-top: -2%;
                 width: 70%;
         }
         

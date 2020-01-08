@@ -237,8 +237,7 @@ select option:disabled {
         background-color: white;
         margin: 0 auto;
         height: 100vh;
-        width: 60%;
-        box-shadow: 1px 1px 5px 0px gray;
+        width: 100%;
 }
 
 .testresultsheading {
@@ -264,4 +263,15 @@ li {
 
 .dynamicQuestionHeading {
         margin-bottom: 2vmin;
+}
+
+
+@media only screen and (max-width: 600px) {
+        .modalContent {
+                background-color: white;
+                margin: 0 auto;
+                height: 100vh;
+                width: 60%;
+                box-shadow: 1px 1px 5px 0px gray;
+        }
 }

@@ -40,7 +40,7 @@ const timer = (minutes) => {
                         timeUI.innerHTML = tt + " minutes left";
                         timeSpent.push(tt);
                 }
-        }, 1000)
+        }, 60000)
 
         if (checkForSubmitButtonClicked === true) {
                 clearInterval(looper);

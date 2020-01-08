@@ -37,7 +37,7 @@ const timer = (minutes) => {
                 } else {
                         let timeUI = document.querySelector("#timeUI");
                         let tt = Number(--minutes);
-                        timeUI.innerHTML = tt + " minutes left";
+                        timeUI.innerHTML = tt + " min left";
                         timeSpent.push(tt);
                 }
         }, 60000)
@@ -101,7 +101,7 @@ const testAreaFunction = () => {
                         if (Array.isArray(obj[key])) {
                                 optionsArray.push(obj[key]);
                         } else if (key === "question") {
-                                let h = document.createElement("h5");
+                                let h = document.createElement("h6");
                                 h.className = 'dynamicQuestionHeading'
                                 h.innerHTML =obj[key];
                                 testArea.appendChild(h);
@@ -177,15 +177,15 @@ const apiCall = (cat, diff) => {
 // update static Time and set count down minutes parameter
 const updateTime = (error) => {
         if (diffLevel[0] === "easy" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 50 + " minutes left";
+                document.querySelector("#timeUI").innerHTML = 50 + " min left";
                 timer(50);
                 timeGiven = 50;
         } else if (diffLevel[0] === "medium" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 40 + " minutes left";
+                document.querySelector("#timeUI").innerHTML = 40 + " min left";
                 timer(40);
                 timeGiven = 40;
         } else if (diffLevel[0] === "hard" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 45 + " minutes left";
+                document.querySelector("#timeUI").innerHTML = 45 + " min left";
                 timer(45);
                 timeGiven = 45;
         }

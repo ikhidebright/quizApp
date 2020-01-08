@@ -177,17 +177,17 @@ const apiCall = (cat, diff) => {
 // update static Time and set count down minutes parameter
 const updateTime = (error) => {
         if (diffLevel[0] === "easy" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 50 + " min left";
-                timer(50);
-                timeGiven = 50;
+                document.querySelector("#timeUI").innerHTML = 20 + " min left";
+                timer(20);
+                timeGiven = 20;
         } else if (diffLevel[0] === "medium" && !(error)) {
                 document.querySelector("#timeUI").innerHTML = 40 + " min left";
-                timer(40);
-                timeGiven = 40;
+                timer(30);
+                timeGiven = 30;
         } else if (diffLevel[0] === "hard" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 45 + " min left";
-                timer(45);
-                timeGiven = 45;
+                document.querySelector("#timeUI").innerHTML = 35 + " min left";
+                timer(35);
+                timeGiven = 35;
         }
 }
 

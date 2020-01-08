@@ -9,20 +9,22 @@ body {
 
 
 .fixed {
-        position: fixed;
-        width: 100%;
+        position: relative;
+        left: 85%;
+        width: 20%;
         margin-top: 0;
-        background-color: white;
 }
 
 #timeUI {
         float: right;
+        position: fixed;
         -moz-float-edge: right;
         margin-top: 2%;
 }
 
 .timeUpUI {
         float: right;
+        position: fixed;
         -moz-float-edge: right;
         margin-top: 2%;
         color: red;
@@ -125,7 +127,23 @@ select option:disabled {
         -moz-float-edge: right;
 }
 
-.activeButton, .btncheck, .correctAnswers {
+#startNew {
+        float: right;
+        display: none;
+        -moz-float-edge: right;
+}
+
+.btncheck2 {
+        background-color: green;
+        border: none;
+        color: white;
+        height: 2em;
+        width: 16%;
+        transition-duration: 600ms;
+        font-size: 1em;
+}
+
+.activeButton, .btncheck, .btncheck2,  .correctAnswers {
         background-color: green;
         border: none;
         color: white;
@@ -163,6 +181,11 @@ select option:disabled {
         outline: none;
 }
 
+
+.btncheck2:focus {
+        outline: none;
+}
+
 .activeButton:hover {
         background-color: rgb(0, 80, 0);
         color: white;
@@ -182,6 +205,15 @@ select option:disabled {
 }
 
 .btncheck:hover {
+        background-color: rgb(0, 80, 0);
+        color: white;
+        border: none;
+        transition-duration: 600ms;
+        position: relative;
+        bottom: 0.2vmin;
+}
+
+.btncheck2:hover {
         background-color: rgb(0, 80, 0);
         color: white;
         border: none;

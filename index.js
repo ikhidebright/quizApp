@@ -13,6 +13,7 @@ let timespent = document.querySelector(".timespent");
 let catShow = document.querySelector(".catShow");
 let diffShow = document.querySelector(".diffShow");
 let testArea = document.querySelector(".testArea");
+let checkCorrectAnswer = document.querySelector(".correctAnswers");
 let timeSpent = [];
 let timeGiven = 0;
 let checkForSubmitButtonClicked = false;
@@ -111,9 +112,26 @@ const testAreaFunction = () => {
                         }
                 }
                 optionsArray.flat().forEach((item) => {
+
+                        let random =() => {
+                                return  Math.floor(Math.random () * 10);
+                        }
+                        
+                        let a = random();
+                        let b = random();
+                        let c = random();
+                        let d = random();
+                        let e = random();
+                        let f = random();
+                        let g = random();
+                        let h = random();
+         
+                        let randomNumForUniqId = a + b + c + d +e + f + g + h;
+
+                        //create list element
                         let li = document.createElement("li");
-                        li.innerHTML = `<input type="radio" name=${optionsArray.flat()} id=${item} />
-                                        <label for=${item} id=${item}>${item}</label>`
+                        li.innerHTML = `<input type="radio" name=${optionsArray.flat()} id=${randomNumForUniqId + item.split("").reverse().join("")} />
+                                        <label for=${randomNumForUniqId + item.split("").reverse().join("")} id=${randomNumForUniqId + item.split("").reverse().join("")}>${item}</label>`
                                         testArea.appendChild(li);
                 })
                 // console.log(optionsArray.flat())
@@ -123,23 +141,7 @@ const testAreaFunction = () => {
         document.querySelector("#sub").style.display = "none";
 }
 
-
-
-//show questions
-// const showQuestions = () => { 
-//         let doc = document.querySelector(".questions");
-//         let headingQue = document.createElement("h6");
-//         apiResults[0].results.map((que) => { 
-//                 document.querySelector("#checkanswer").style.display = "block";
-//                 document.querySelector("#sub").style.display = "none";
-//                 console.log(apiResults);
-//                 headingQue.appendChild(document.createTextNode(que.question));
-//                 doc.appendChild(headingQue);
-//         });                 
-//         updateCatDiffOnCheckResults();
-
-// }
-
+//update category and difficulty levels on results page
 const updateCatDiffOnCheckResults = () => {
         document.querySelector(".catShow").innerHTML = "Question Category: " + apiResults[0].results[0].category;
         document.querySelector(".diffShow").innerHTML = "Difficulty Level: " + apiResults[0].results[0].difficulty;
@@ -231,3 +233,47 @@ submitButton.addEventListener("click", () => {
                 apiCall(diffCat[0], diffLevel[0]);
         }
 })
+
+
+
+
+//check for correct answers and close the results dialog box
+
+const markAns  = () => {
+        let getLabelText = document.querySelectorAll("label");
+        let inputRad = document.querySelectorAll("input[type=radio]");
+        inputRad.forEach((inputItem) => {
+                inputItem.disabled = true;
+        })
+        let array2 = apiResults[0].results;
+        array2.forEach((obj) => {       
+        let correctAns = [];
+                for (var key in obj) {
+                         if (key === "correct_answer") {
+                               correctAns.push(obj[key]);
+                        } else {
+                                // do nothing
+                        }
+                }   
+
+                getLabelText.forEach((item) => {
+                        if(item.innerHTML.includes(correctAns)) { 
+                        item.style.color = 'white'      
+                        item.style.backgroundColor = 'green'
+                        item.style.fontWeight = 'bold'} else { }
+                })
+        })
+        document.querySelector("#timeUI").style.display = 'none'
+        document.querySelector(".modalBody").style.display = 'none'
+        document.querySelector("#checkanswer").style.display = "none";
+        document.querySelector("#sub").style.display = "none";
+        document.querySelector("#startNew").style.display = 'block'
+}
+
+
+checkCorrectAnswer.addEventListener("click", markAns)
+
+
+document.querySelector("#startNew").onclick = () => {
+        window.location.reload(true)
+}

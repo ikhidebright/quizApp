@@ -404,6 +404,7 @@ li {
                 display: block;
                 float: right;
                 display: none;
+                width: 14%;
                 -moz-float-edge: right;
         }
         

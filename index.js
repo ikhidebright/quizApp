@@ -18,6 +18,7 @@ let timeSpent = [];
 let timeGiven = 0;
 let numberOfQuestions = 0;
 let checkForSubmitButtonClicked = false;
+let loadIcon = document.querySelector(".centerSticky");
 
 //dynamic timer count down
 const timer = (minutes) => {
@@ -141,6 +142,21 @@ const updateCatDiffOnCheckResults = () => {
 }
 
 
+//funtion to mix options array
+const mix = (arrayA) => {
+        let currentIndex =  arrayA.length,
+        temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = arrayA[currentIndex];
+        arrayA[currentIndex] = arrayA[randomIndex];
+        arrayA[randomIndex] = temporaryValue;
+}
+        return arrayA
+}
+
+
 //update test area
 const testAreaFunction = () => {
         let array = apiResults[0].results;
@@ -160,7 +176,13 @@ const testAreaFunction = () => {
                                 // do nothing
                         }
                 }
-                optionsArray.flat().forEach((item) => {
+                
+
+                let mixF = optionsArray.flat();
+
+                let mixA = mix(mixF)
+
+                mixA.forEach((item) => {
 
                         let random =() => {
                                 return  Math.floor(Math.random () * 10);
@@ -240,8 +262,25 @@ const thereIsError = () => {
 }
 
 
+const loader = () => {setInterval(() => {
+        if(testArea.innerHTML.length > 200 && document.querySelector("#timeUI").innerHTML.length > 5){
+        loadIcon.style.display = 'none';
+        testArea.style.display = 'block';
+        } else if (document.querySelector(".error").innerHTML.length > 10){
+                loadIcon.style.display = 'none';
+                testArea.style.display = 'none';
+                document.querySelector("#timeUI").style.display = "none";
+                document.querySelector(".error").style.display = "block";
+        } else  { 
+        loadIcon.style.display = 'block';
+        document.querySelector(".rules").style.display = "none";
+        }
+}, 100)
+}
+
 // submit button
 submitButton.addEventListener("click", () => {
+        loader();
         //set  parameters for the api to use
         if (diffLevel[0] === "easy") {
                 apiCall(numberOfQuestions, diffCat[0], diffLevel[0]);

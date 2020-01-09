@@ -261,7 +261,8 @@ select option:disabled {
 .testArea {
         width: 80%;
         margin-top: 10%;
-        transition-duration: 700ms;
+        transition-duration: 900ms;
+        display: none;
 }
 
 li {
@@ -273,8 +274,71 @@ li {
         margin-bottom: 2vmin;
 }
 
+.centerSticky {
+        width: 40%;
+        margin: 0 auto;
+        margin-top: 70%;
+        display: none;
+}
+
+.loader {
+        border: 16px solid #f2f2f2;
+        border-radius: 50%;
+        border-top: 16px solid green;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+        0% {transform: rotate(0deg);}
+        100% {transform: rotate(360deg);}
+}
+
 
 @media only screen and (min-width: 991px) {
+
+        .testArea {
+                width: 80%;
+                margin-top: 10%;
+                transition-duration: 900ms;
+                display: none;
+        }
+        
+        li {
+                list-style-type: none;
+                margin-bottom: 2vmin;
+        }
+        
+        .dynamicQuestionHeading {
+                margin-bottom: 2vmin;
+        }
+        
+        .centerSticky {
+                width: 20%;
+                margin: 0 auto;
+                margin-top: 10%;
+                display: none;
+        }
+        
+        .loader {
+                border: 16px solid #f2f2f2;
+                border-radius: 50%;
+                border-top: 16px solid green;
+                width: 120px;
+                height: 120px;
+                animation: spin 2s linear infinite;
+                -webkit-animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+                0% {transform: rotate(0deg);}
+                100% {transform: rotate(360deg);}
+        }
+
+
+
         .modalContent {
                 background-color: white;
                 margin: 0 auto;

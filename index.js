@@ -266,6 +266,7 @@ const loader = () => {setInterval(() => {
         if(testArea.innerHTML.length > 200 && document.querySelector("#timeUI").innerHTML.length > 5){
         loadIcon.style.display = 'none';
         testArea.style.display = 'block';
+        document.querySelector("#timeUI").style.display = "block";
         } else if (document.querySelector(".error").innerHTML.length > 10){
                 loadIcon.style.display = 'none';
                 testArea.style.display = 'none';

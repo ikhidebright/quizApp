@@ -20,6 +20,7 @@ body {
         position: fixed;
         font-size: 0.8em;
         width: 20%;
+        display: none;
         -moz-float-edge: right;
         margin: 20% 2vmin 0 0;
 }

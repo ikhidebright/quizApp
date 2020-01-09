@@ -19,6 +19,16 @@ let timeGiven = 0;
 let numberOfQuestions = 0;
 let checkForSubmitButtonClicked = false;
 let loadIcon = document.querySelector(".centerSticky");
+let seconds = document.querySelector("#timeSec");
+
+// const secondsFun = () => {
+//          setInterval(() => {
+//         let date = new Date();
+//         return date.getSeconds();
+// }, 1000)}
+
+// console.log(secondsFun())
+
 
 //dynamic timer count down
 const timer = (minutes) => {
@@ -101,6 +111,7 @@ const computeResults = () => {
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
+        clearInterval(loader); 
 
 }
 // assign computeResults function to checkanswersbutton
@@ -329,7 +340,10 @@ const markAns  = () => {
         document.querySelector(".modalBody").style.display = 'none'
         document.querySelector("#checkanswer").style.display = "none";
         document.querySelector("#sub").style.display = "none";
-        document.querySelector("#startNew").style.display = 'block'
+        document.querySelector("#startNew").style.display = 'block';
+        document.querySelector(".fixed").style.display = 'none';
+        clearInterval(loader);
+
 }
 
 

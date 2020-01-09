@@ -275,6 +275,7 @@ const loader = () => {setInterval(() => {
         } else  { 
         loadIcon.style.display = 'block';
         document.querySelector(".rules").style.display = "none";
+        document.querySelector("#timeUI").style.display = "none";
         }
 }, 100)
 }

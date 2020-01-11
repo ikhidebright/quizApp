@@ -21,7 +21,7 @@ let checkForSubmitButtonClicked = false;
 let loadIcon = document.querySelector(".centerSticky");
 let seconds = document.querySelector("#timeSec");
 let questionAnswered = document.querySelector(".quesAns");
-let clickedCount = [];
+let questionAnsweredcorrectly = document.querySelector(".qa");
 let queCorrect = [];
 let numm = 0;
 
@@ -36,32 +36,86 @@ const updateHour = () => {
         }
 }
 
+
+let correctAns = [];
+let  clickedCount = [];
+let wrongCorrect = [];
+
+
 // count number of questions answered
 const count = () => {
         let inputRad = document.querySelectorAll("input");
-        inputRad.forEach((inputItem) => {
-                if (inputItem.checked === true) {
-                clickedCount.push(1)
-                } else {
-                // do nothing
-                }
-                questionAnswered.innerHTML = "Questions answered: " + clickedCount.length;    
-        })
-}
+        let array2 = apiResults[0].results;
+       
+                inputRad.forEach((inputItem) => {
+                        if (inputItem.checked === true) {
+                       clickedCount.push(inputItem.value)
+                        } else {
+                        // do nothing
+                        }
+        
+                        array2.forEach((obj) => {    
+                                        for (var key in obj) {
+                                                 if (key === "correct_answer") {
+                                                       correctAns.push(obj[key]);
+                                                } else {
+                                                        // do nothing
+                                                }
+                                        }  
+                            
+                        })    
+                })
+        
+        
+        questionAnswered.innerHTML = "Questions answered: " + clickedCount.length;  
+
+       answeredCorrectly();
+        }
 
 
-// count number of questions answered
-const countAns = () => {
-        let inputRad = document.querySelectorAll("input");
-        inputRad.forEach((inputItem) => {
-                if (inputItem.checked.value) {
-                console.log(inputItem.value)
-                } else {
-                // do nothing
+        const answeredCorrectly = () => {
+                let array2 = apiResults[0].results;
+                array2.forEach((obj) => {       
+                let correctAns = [];
+                        for (var key in obj) {
+                                 if (key === "correct_answer") {
+                                       correctAns.push(obj[key]);
+                                } else {
+                                        // do nothing
+                                }
+                        }  
+                        clickedCount.forEach((item) => {
+                                // console.log(item.innerHTML.split(" ").join(""))
+                                // let itemEach = item.innerHTML.split(" ").join("");
+                                // let corEach = String(correctAns).split(" ").join("");
+                                        if(item === String(correctAns).split(" ").join("")) { 
+                                                wrongCorrect.push(item)
+                                              
+                                        } else {
+                                        // do nothing
+                                         }
+                        })
+                })
+                questionAnsweredcorrectly.innerHTML = "Questions answered Correctly: " + wrongCorrect.length; 
+               
+                
                 }
-                document.querySelector(".qa").innerHTML = "Questions answered correctly: " + queCorrect.length;    
-        })
-}
+
+
+// const count = () => {
+//         let inputRad = document.querySelectorAll("input");
+//         inputRad.forEach((inputItem) => {
+//                 if (inputItem.checked === true) {
+//                clickedCount.push(inputItem.value)
+//                 } else {
+//                 // do nothing
+//                 }
+                 
+//                 console.log(clickedCount)
+//                 console.log(clickedCount.length)
+//         })
+// }
+
 
 
 //dynamic seconds
@@ -177,7 +231,6 @@ const computeResults = () => {
         updateCatDiffOnCheckResults();
         clearInterval(loader); 
         count();
-        countAns();
 }
 // assign computeResults function to checkanswersbutton
 checkanswerbutton.addEventListener("click", computeResults);
@@ -273,7 +326,7 @@ const testAreaFunction = () => {
 
                         //create list element
                         let li = document.createElement("li");
-                        li.innerHTML = `<input type="radio" name=${optionsArray.flat()} id=${randomNumForUniqId + item.split("").reverse().join("")} />
+                        li.innerHTML = `<input type="radio" value=${item.split(" ").join("")} name=${optionsArray.flat()} id=${randomNumForUniqId + item.split("").reverse().join("")} />
                                         <label for=${randomNumForUniqId + item.split("").reverse().join("")} id=${randomNumForUniqId + item.split("").reverse().join("")}>${item}</label>`
                                         testArea.appendChild(li);
                 })

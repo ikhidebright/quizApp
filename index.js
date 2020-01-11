@@ -22,6 +22,7 @@ let loadIcon = document.querySelector(".centerSticky");
 let seconds = document.querySelector("#timeSec");
 let questionAnswered = document.querySelector(".quesAns");
 let questionAnsweredcorrectly = document.querySelector(".qa");
+let remark = document.querySelector(".remark");
 let queCorrect = [];
 let numm = 0;
 
@@ -41,6 +42,16 @@ let correctAns = [];
 let  clickedCount = [];
 let wrongCorrect = [];
 
+// showing remarks
+const remarkFun = () => {
+        if(wrongCorrect.length <= 5) {
+                remark.innerHTML = "Remark: aww your score is really poor, i swear"
+        }  else if(wrongCorrect.length <= 10) {
+                remark.innerHTML = "Remark: You try small"
+        } else  if(wrongCorrect.length > 10) {
+                remark.innerHTML = "Remark: Superb!"
+        }
+}
 
 // count number of questions answered
 const count = () => {
@@ -72,7 +83,7 @@ const count = () => {
        answeredCorrectly();
         }
 
-
+// only calculate correct answers
         const answeredCorrectly = () => {
                 let array2 = apiResults[0].results;
                 array2.forEach((obj) => {       
@@ -97,24 +108,8 @@ const count = () => {
                         })
                 })
                 questionAnsweredcorrectly.innerHTML = "Questions answered Correctly: " + wrongCorrect.length; 
-               
-                
+                remarkFun();
                 }
-
-
-// const count = () => {
-//         let inputRad = document.querySelectorAll("input");
-//         inputRad.forEach((inputItem) => {
-//                 if (inputItem.checked === true) {
-//                clickedCount.push(inputItem.value)
-//                 } else {
-//                 // do nothing
-//                 }
-                 
-//                 console.log(clickedCount)
-//                 console.log(clickedCount.length)
-//         })
-// }
 
 
 
@@ -156,6 +151,11 @@ const timer = (minutes) => {
 
         }, 100)
         let looper = setInterval(() => {
+                
+                if (checkForSubmitButtonClicked === true) {
+                        clearInterval(looper);
+                }
+
                 if (minutes === 0) {
                         // do nothing
                         document.querySelector(".up").textContent = "Sorry, your time is up!";
@@ -170,11 +170,7 @@ const timer = (minutes) => {
                         timeSpent.push(tt);
                         numm = tt;
                 }
-        }, 60000)
-
-        if (checkForSubmitButtonClicked === true) {
-                clearInterval(looper);
-        }
+        }, 1000)
 }
 
 // update number of ques
@@ -229,6 +225,7 @@ const computeResults = () => {
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
+        document.querySelector(".fixed").style.display = "none";
         clearInterval(loader); 
         count();
 }

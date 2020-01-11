@@ -23,7 +23,7 @@ body {
         display: none;
         transition-duration: 500ms;
         -moz-float-edge: right;
-        margin: 20% 2vmin 0 0;
+        margin: 20% 2vmin 0 2%;
 }
 
 

@@ -20,18 +20,53 @@ let numberOfQuestions = 0;
 let checkForSubmitButtonClicked = false;
 let loadIcon = document.querySelector(".centerSticky");
 let seconds = document.querySelector("#timeSec");
+let questionAnswered = document.querySelector(".quesAns");
 
-// const secondsFun = () => {
-//          setInterval(() => {
-//         let date = new Date();
-//         return date.getSeconds();
-// }, 1000)}
 
-// console.log(secondsFun())
+// count number of questions answered
+const count = () => {
+        let inputRad = document.querySelectorAll("input");
+        inputRad.forEach((inputItem) => {
+                let clickedCount = [];
+                if (inputItem.checked === true) {
+                clickedCount.push("clicked")
+                } else {
+                // do nothing
+                }
+                questionAnswered.innerHTML = "Questions answered: " + clickedCount.length;    
+        })
+}
+
+//dynamic seconds
+const secondsFun = (sec) => {
+        sec = 0;
+        let et = "0";
+        let d = ":";
+        let looper = setInterval(() => {
+                if (sec === 60) {
+                   sec = 0; 
+                   tt = 0;   
+                   seconds.innerHTML = d + et + tt
+                } else if (sec < 10) {
+                        let tt = Number(++sec);
+                        seconds.innerHTML = d + et + tt
+                } else {
+                        let tt = Number(++sec);
+                        seconds.innerHTML = d + tt
+                }
+        }, 1000)
+}
+
+let checkInt = setInterval(() => {
+if(testArea.innerHTML.length > 50 && document.querySelector("#timeUI").innerHTML.length > 5){            
+        secondsFun();
+        clearInterval(checkInt);
+}
+}, 100)
 
 
 //dynamic timer count down
-const timer = (minutes) => {
+const timer = (minutes) => {           
         setInterval(() => {
                 if (minutes === 5) {
                         document.querySelector("#timeUI").className = 'timeUpUI';
@@ -49,7 +84,7 @@ const timer = (minutes) => {
                 } else {
                         let timeUI = document.querySelector("#timeUI");
                         let tt = Number(--minutes);
-                        timeUI.innerHTML = tt + " min left";
+                        timeUI.innerHTML = tt;
                         timeSpent.push(tt);
                 }
         }, 60000)
@@ -112,10 +147,9 @@ const computeResults = () => {
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
         clearInterval(loader); 
-
+        count();
 }
 // assign computeResults function to checkanswersbutton
-
 checkanswerbutton.addEventListener("click", computeResults);
 
 
@@ -225,17 +259,17 @@ const testAreaFunction = () => {
 // update static Time and set count down minutes parameter
 const updateTime = (error) => {
         if (diffLevel[0] === "easy" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 20 + " min left";
+                document.querySelector("#timeUI").innerHTML = 20;
                 timer(20);
                 timeGiven = 20;
                 numberOfQuestions = 15;
         } else if (diffLevel[0] === "medium" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 30 + " min left";
+                document.querySelector("#timeUI").innerHTML = 30;
                 timer(30);
                 timeGiven = 30;
                 numberOfQuestions = 30;
         } else if (diffLevel[0] === "hard" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 35 + " min left";
+                document.querySelector("#timeUI").innerHTML = 35;
                 timer(35);
                 timeGiven = 35;
                 numberOfQuestions = 45
@@ -273,8 +307,11 @@ const thereIsError = () => {
 }
 
 
-const loader = () => {setInterval(() => {
-        if(testArea.innerHTML.length > 200 && document.querySelector("#timeUI").innerHTML.length > 5){
+const loader = () => {
+        
+        
+        setInterval(() => {
+        if(testArea.innerHTML.length > 50 && document.querySelector("#timeUI").innerHTML.length > 5){            
         loadIcon.style.display = 'none';
         testArea.style.display = 'block';
         document.querySelector("#timeUI").style.display = "block";
@@ -289,6 +326,13 @@ const loader = () => {setInterval(() => {
         document.querySelector("#timeUI").style.display = "none";
         }
 }, 100)
+
+
+
+if(testArea.innerHTML.length > 50 && document.querySelector("#timeUI").innerHTML.length > 5){            
+        secondsFun();
+
+}
 }
 
 // submit button
@@ -330,10 +374,14 @@ const markAns  = () => {
                 }   
 
                 getLabelText.forEach((item) => {
-                        if(item.innerHTML.includes(correctAns)) { 
-                        item.style.color = 'white'      
-                        item.style.backgroundColor = 'green'
-                        item.style.fontWeight = 'bold'} else { }
+                        let itemEach = item.innerHTML.split(" ").join("");
+                                if(itemEach === String(correctAns).split(" ").join("")) { 
+                                        item.style.color = 'white'      
+                                        item.style.backgroundColor = 'green'
+                                        item.style.fontWeight = 'bold';
+                                } else {
+                                // do nothing
+                                 }
                 })
         })
         document.querySelector("#timeUI").style.display = 'none'

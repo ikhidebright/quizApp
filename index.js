@@ -49,7 +49,7 @@ const secondsFun = (sec) => {
                    seconds.innerHTML = d + et + tt
                 } else if (sec < 9) {
                         let tt = Number(++sec);
-                        seconds.innerHTML = d + et + tt
+                        seconds.innerHTML = d + " " + et + tt
                 } else {
                         let tt = Number(++sec);
                         seconds.innerHTML = d + tt

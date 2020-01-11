@@ -43,11 +43,11 @@ const secondsFun = (sec) => {
         let et = "0";
         let d = ":";
         let looper = setInterval(() => {
-                if (sec === 60) {
+                if (sec === 59) {
                    sec = 0; 
                    tt = 0;   
                    seconds.innerHTML = d + et + tt
-                } else if (sec < 10) {
+                } else if (sec < 9) {
                         let tt = Number(++sec);
                         seconds.innerHTML = d + et + tt
                 } else {
@@ -58,9 +58,9 @@ const secondsFun = (sec) => {
 }
 
 let checkInt = setInterval(() => {
-if(testArea.innerHTML.length > 50 && document.querySelector("#timeUI").innerHTML.length > 5){            
+if(testArea.innerHTML.length > 50){            
         secondsFun();
-        clearInterval(checkInt);
+        clearInterval(checkInt)
 }
 }, 100)
 
@@ -308,13 +308,12 @@ const thereIsError = () => {
 
 
 const loader = () => {
-        
-        
         setInterval(() => {
-        if(testArea.innerHTML.length > 50 && document.querySelector("#timeUI").innerHTML.length > 5){            
+        if(testArea.innerHTML.length > 50 ){            
         loadIcon.style.display = 'none';
         testArea.style.display = 'block';
         document.querySelector("#timeUI").style.display = "block";
+        document.querySelector("#timeSec").style.display = "block";
         } else if (document.querySelector(".error").innerHTML.length > 10){
                 loadIcon.style.display = 'none';
                 testArea.style.display = 'none';
@@ -326,18 +325,11 @@ const loader = () => {
         document.querySelector("#timeUI").style.display = "none";
         }
 }, 100)
-
-
-
-if(testArea.innerHTML.length > 50 && document.querySelector("#timeUI").innerHTML.length > 5){            
-        secondsFun();
-
-}
 }
 
 // submit button
 submitButton.addEventListener("click", () => {
-        loader();
+       
         //set  parameters for the api to use
         if (diffLevel[0] === "easy") {
                 apiCall(numberOfQuestions, diffCat[0], diffLevel[0]);
@@ -349,6 +341,8 @@ submitButton.addEventListener("click", () => {
                 apiCall(numberOfQuestions, diffCat[0], diffLevel[0]);
                 updateNumberOfQuestions();
         }
+
+        loader();
 })
 
 

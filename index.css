@@ -15,10 +15,17 @@ body {
         margin-top: 0;
 }
 
-
-.timeSec {
-        display: inline-block;
+#timeSec {
+        float: right;
+        position: fixed;
+        font-size: 0.8em;
+        width: 20%;
+        display: none;
+        transition-duration: 500ms;
+        -moz-float-edge: right;
+        margin: 20% 2vmin 0 0;
 }
+
 
 #timeUI {
         float: right;
@@ -28,7 +35,7 @@ body {
         display: none;
         transition-duration: 500ms;
         -moz-float-edge: right;
-        margin: 20% 2vmin 0 0;
+        margin: 20% 2vmin 0 -3%;
 }
 
 .timeUpUI {
@@ -372,6 +379,15 @@ li {
                 position: fixed;
                 -moz-float-edge: right;
                 margin-top: 1%;
+                margin-left: -2%;
+        transition-duration: 500ms;
+                font-size: 1.5em;
+        }
+
+        #timeSec {
+                position: fixed;
+                display: inline;
+                margin: 1% 22% 0 0;
         transition-duration: 500ms;
                 font-size: 1.5em;
         }

@@ -23,7 +23,7 @@ body {
         display: none;
         transition-duration: 500ms;
         -moz-float-edge: right;
-        margin: 20% 2vmin 0 2%;
+        margin: 20% 5% 0 2%;
 }
 
 
@@ -35,7 +35,7 @@ body {
         display: none;
         transition-duration: 500ms;
         -moz-float-edge: right;
-        margin: 20% 2vmin 0 -3%;
+        margin: 20% -5% 0 -3%;
 }
 
 .timeUpUI {
@@ -380,15 +380,15 @@ li {
                 -moz-float-edge: right;
                 margin-top: 1%;
                 margin-left: -2%;
-        transition-duration: 500ms;
+                transition-duration: 500ms;
                 font-size: 1.5em;
         }
 
         #timeSec {
                 position: fixed;
-                display: inline;
-                margin: 1% 22% 0 0;
-        transition-duration: 500ms;
+                float: right;
+                margin: 2% 0% 0 0;
+                transition-duration: 500ms;
                 font-size: 1.5em;
         }
         

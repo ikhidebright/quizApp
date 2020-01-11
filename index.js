@@ -21,21 +21,48 @@ let checkForSubmitButtonClicked = false;
 let loadIcon = document.querySelector(".centerSticky");
 let seconds = document.querySelector("#timeSec");
 let questionAnswered = document.querySelector(".quesAns");
+let clickedCount = [];
+let queCorrect = [];
+let numm = 0;
 
+
+const updateHour = () => {
+        if (diffLevel[0]) {
+                numm = 20;
+        } else if (diffLevel[0]) {
+                numm = 30;
+        } else if (diffLevel[0]) {
+                numm = 35;
+        }
+}
 
 // count number of questions answered
 const count = () => {
         let inputRad = document.querySelectorAll("input");
         inputRad.forEach((inputItem) => {
-                let clickedCount = [];
                 if (inputItem.checked === true) {
-                clickedCount.push("clicked")
+                clickedCount.push(1)
                 } else {
                 // do nothing
                 }
                 questionAnswered.innerHTML = "Questions answered: " + clickedCount.length;    
         })
 }
+
+
+// count number of questions answered
+const countAns = () => {
+        let inputRad = document.querySelectorAll("input");
+        inputRad.forEach((inputItem) => {
+                if (inputItem.checked.value) {
+                console.log(inputItem.value)
+                } else {
+                // do nothing
+                }
+                document.querySelector(".qa").innerHTML = "Questions answered correctly: " + queCorrect.length;    
+        })
+}
+
 
 //dynamic seconds
 const secondsFun = (sec) => {
@@ -46,13 +73,13 @@ const secondsFun = (sec) => {
                 if (sec === 59) {
                    sec = 0; 
                    tt = 0;   
-                   seconds.innerHTML = d + et + tt
+                   seconds.innerHTML =numm +  d + et + tt
                 } else if (sec < 9) {
                         let tt = Number(++sec);
-                        seconds.innerHTML = d + " " + et + tt
+                        seconds.innerHTML =numm + d + et + tt
                 } else {
                         let tt = Number(++sec);
-                        seconds.innerHTML = d + tt
+                        seconds.innerHTML = numm +  d + tt
                 }
         }, 1000)
 }
@@ -66,26 +93,28 @@ if(testArea.innerHTML.length > 50){
 
 
 //dynamic timer count down
-const timer = (minutes) => {           
+const timer = (minutes) => {     
+        numm = minutes;      
         setInterval(() => {
                 if (minutes === 5) {
-                        document.querySelector("#timeUI").className = 'timeUpUI';
+                        document.querySelector(".fixed").style.color = 'red';
                 }
 
         }, 100)
         let looper = setInterval(() => {
-
                 if (minutes === 0) {
                         // do nothing
                         document.querySelector(".up").textContent = "Sorry, your time is up!";
                         document.querySelector(".up").style.color = 'red'
                         computeResults();
+                        clearInterval(looper)
 
                 } else {
-                        let timeUI = document.querySelector("#timeUI");
+                        // let timeUI = document.querySelector("#timeUI");
                         let tt = Number(--minutes);
-                        timeUI.innerHTML = tt;
+                        // timeUI.innerHTML = tt;
                         timeSpent.push(tt);
+                        numm = tt;
                 }
         }, 60000)
 
@@ -141,13 +170,14 @@ const buttonUpdate = () => {
 
 // calculate results and update UI and other updates
 const computeResults = () => {
-        let finaltime = timeGiven - timeSpent[timeSpent.length - 2];
+        let finaltime = timeGiven - timeSpent[timeSpent.length - 1];
         modalBody.style.display = 'block';
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
         clearInterval(loader); 
         count();
+        countAns();
 }
 // assign computeResults function to checkanswersbutton
 checkanswerbutton.addEventListener("click", computeResults);
@@ -164,10 +194,7 @@ const apiCall = (numberOfQuestions, cat, diff) => {
                                 document.querySelector(".error").style.display = "none";
                                 document.querySelector(".rules").style.display = "none";
                                 apiResults.push(data);
-                                // console.log(data.results)
-                                // showQuestions();
                                 testAreaFunction();
-                                inputBox();
                                 updateTime();
                         })
                 }).catch((err) => {
@@ -252,24 +279,22 @@ const testAreaFunction = () => {
                 })
                 // console.log(optionsArray.flat())
         })
-        document.querySelector("#checkanswer").style.display = "block";
-        document.querySelector("#sub").style.display = "none";
 }
 
 // update static Time and set count down minutes parameter
 const updateTime = (error) => {
         if (diffLevel[0] === "easy" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 20;
+                // document.querySelector("#timeUI").innerHTML = 20;
                 timer(20);
                 timeGiven = 20;
                 numberOfQuestions = 15;
         } else if (diffLevel[0] === "medium" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 30;
+                // document.querySelector("#timeUI").innerHTML = 30;
                 timer(30);
                 timeGiven = 30;
                 numberOfQuestions = 30;
         } else if (diffLevel[0] === "hard" && !(error)) {
-                document.querySelector("#timeUI").innerHTML = 35;
+                // document.querySelector("#timeUI").innerHTML = 35;
                 timer(35);
                 timeGiven = 35;
                 numberOfQuestions = 45
@@ -309,20 +334,24 @@ const thereIsError = () => {
 
 const loader = () => {
         setInterval(() => {
-        if(testArea.innerHTML.length > 50 ){            
+        if(testArea.innerHTML.length > 50 ){  
+        inputBox();
+        updateTime(error);    
         loadIcon.style.display = 'none';
         testArea.style.display = 'block';
-        document.querySelector("#timeUI").style.display = "block";
         document.querySelector("#timeSec").style.display = "block";
+        // work on this later, makes the button still on marking page
+        document.querySelector("#checkanswer").style.display = "block";
+        document.querySelector("#sub").style.display = "none";
         } else if (document.querySelector(".error").innerHTML.length > 10){
                 loadIcon.style.display = 'none';
                 testArea.style.display = 'none';
-                document.querySelector("#timeUI").style.display = "none";
+                // document.querySelector("#timeUI").style.display = "none";
                 document.querySelector(".error").style.display = "block";
         } else  { 
         loadIcon.style.display = 'block';
         document.querySelector(".rules").style.display = "none";
-        document.querySelector("#timeUI").style.display = "none";
+        // document.querySelector("#timeUI").style.display = "none";
         }
 }, 100)
 }
@@ -378,7 +407,7 @@ const markAns  = () => {
                                  }
                 })
         })
-        document.querySelector("#timeUI").style.display = 'none'
+        document.querySelector("#timeSec").style.display = 'none'
         document.querySelector(".modalBody").style.display = 'none'
         document.querySelector("#checkanswer").style.display = "none";
         document.querySelector("#sub").style.display = "none";

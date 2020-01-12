@@ -316,9 +316,9 @@ li {
 
 
 .centerSticky2 {
-        width: 10%;
+        width: 40%;
         margin: 0 auto;
-        margin-top: 20%;
+        margin-top: 70%;
         display: none;
 }
 
@@ -363,6 +363,16 @@ li {
                 display: none;
         }
         
+
+        
+.centerSticky2 {
+        width: 10%;
+        margin: 0 auto;
+        margin-top: 20%;
+        display: none;
+}
+
+
         .loader {
                 border: 16px solid #f2f2f2;
                 border-radius: 50%;

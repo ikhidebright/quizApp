@@ -243,7 +243,12 @@ const buttonUpdate = () => {
 // calculate results and update UI and other updates
 const computeResults = () => {
         let finaltime = timeGiven - timeSpent[timeSpent.length - 1];
+        if(isNaN(finaltime) || finaltime < 1) {
+                timespent.innerHTML = "Time spent: Under a minute";   
+        } else {
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
+        }
+
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
         document.querySelector(".fixed").style.display = "none";

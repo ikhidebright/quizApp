@@ -7,11 +7,32 @@ body {
         margin-top: 10%;
 }
 
+
+.print {
+display: inline;
+text-decoration: none;
+font-weight: bold;
+color: green;
+}
+
+.print:hover {
+        display: inline;
+        text-decoration: none;
+        font-weight: bold;
+        color: rgb(7, 77, 7);
+        }
+
+
+.note p {      
+display: inline;
+}
+
 .note {
 background-color: cornsilk;
 color: black;
 width: 100%;
 padding: 1em;
+margin-bottom: 2%;
 }
 
 .fixed {

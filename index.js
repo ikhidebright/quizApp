@@ -20,6 +20,7 @@ let numberOfQuestions = 0;
 let checkForSubmitButtonClicked = false;
 let markmark = false;
 let markmark2 = false;
+let isThereFeedback = false;
 let loadIcon = document.querySelector(".centerSticky");
 let seconds = document.querySelector("#timeSec");
 let questionAnswered = document.querySelector(".quesAns");
@@ -71,9 +72,9 @@ let wrongCorrect = [];
 // showing remarks
 const remarkFun = () => {
         if(wrongCorrect.length <= 5) {
-                remark.innerHTML = "Remark: aww your score is really poor, i swear"
+                remark.innerHTML = "Remark: Poor"
         }  else if(wrongCorrect.length <= 10) {
-                remark.innerHTML = "Remark: You try small"
+                remark.innerHTML = "Remark: Good"
         } else  if(wrongCorrect.length > 10) {
                 remark.innerHTML = "Remark: Superb!"
         }
@@ -264,6 +265,7 @@ const apiCall = (numberOfQuestions, cat, diff) => {
                                 document.querySelector(".error").style.display = "none";
                                 document.querySelector(".rules").style.display = "none";
                                 apiResults.push(data);
+                                isThereFeedback = true;
                                 testAreaFunction();
                                 updateTime();
                         })
@@ -387,7 +389,7 @@ const inputBox = (error) => {
 const loading = () => {
         if (error) {
                 document.querySelector(".rules").style.display = "none";
-                document.querySelector(".error").textContent = 'Sorry, an Error occurred. Check your Internet connection and try again';
+                document.querySelector(".error").textContent = 'Problem with internet connection. Please make sure that your device is not switched to airplane mode';
         }
 }
 
@@ -400,7 +402,17 @@ const thereIsError = () => {
 
 
 const loader = () => {
-        let loader = setInterval(() => {
+        let count = 0;
+        let loader = setInterval(() => {  
+        let ttt =  Number(++count)   
+        console.log(ttt)
+        if(ttt === 600 && testArea.innerHTML.length < 10 && isThereFeedback === true) {
+        clearInterval(loader)
+        document.querySelector(".error").style.display = "block";
+        document.querySelector(".error").innerHTML = "Looks like the server is taking too long to respond, please try again in sometime or choose a different category";
+        }
+
+
         if(testArea.innerHTML.length > 50 ){  
         inputBox();
         updateTime(error);    

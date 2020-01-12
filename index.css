@@ -472,7 +472,7 @@ li {
                 width: 50%;
                 margin: auto;
                 margin-top: 10%;
-                text-align: center;
+                text-align: left;
                 color: red;
                 animation: shake 1s infinite;
         }

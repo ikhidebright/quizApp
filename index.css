@@ -7,6 +7,12 @@ body {
         margin-top: 10%;
 }
 
+.note {
+background-color: cornsilk;
+color: black;
+width: 100%;
+padding: 1em;
+}
 
 .fixed {
         position: relative;
@@ -253,6 +259,19 @@ select option:disabled {
         z-index: 1;
 }
 
+
+
+.modalBody2 {
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        overflow: scroll;
+        top: 0;
+        z-index: 1;
+}
+
 .modalContent {
         background-color: white;
         margin: 0 auto;
@@ -292,6 +311,14 @@ li {
         width: 40%;
         margin: 0 auto;
         margin-top: 70%;
+        display: none;
+}
+
+
+.centerSticky2 {
+        width: 10%;
+        margin: 0 auto;
+        margin-top: 20%;
         display: none;
 }
 

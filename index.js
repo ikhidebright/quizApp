@@ -18,14 +18,41 @@ let timeSpent = [];
 let timeGiven = 0;
 let numberOfQuestions = 0;
 let checkForSubmitButtonClicked = false;
+let markmark = false;
+let markmark2 = false;
 let loadIcon = document.querySelector(".centerSticky");
 let seconds = document.querySelector("#timeSec");
 let questionAnswered = document.querySelector(".quesAns");
 let questionAnsweredcorrectly = document.querySelector(".qa");
+let modal2 = document.querySelector(".modalBody2");
 let remark = document.querySelector(".remark");
 let queCorrect = [];
 let numm = 0;
 
+ 
+//show loading before displaying result
+const loader2 = () => {
+        modal2.style.display = "block";
+        document.querySelector(".centerSticky2").style.display = "block";
+        let count = 0;
+        let loader2 = setInterval(() => {
+        let ttt =  Number(++count)
+        console.log(ttt)
+        if(count === 5) {
+                clearInterval(loader2);
+                computeResults();
+                document.querySelector(".modalBody").style.display = "block";
+                modal2.style.display = "none";
+        }else if (markmark2 === true) {
+                clearInterval(loader2);   
+                document.querySelector(".loader").style.display = "none"; 
+        } else if (count > 5 ) {
+                document.querySelector(".modalBody2").style.display = "none";  
+                clearInterval(loader2);
+        }
+
+}, 1000)
+}
 
 const updateHour = () => {
         if (diffLevel[0]) {
@@ -170,7 +197,7 @@ const timer = (minutes) => {
                         timeSpent.push(tt);
                         numm = tt;
                 }
-        }, 1000)
+        }, 60000)
 }
 
 // update number of ques
@@ -221,7 +248,8 @@ const buttonUpdate = () => {
 // calculate results and update UI and other updates
 const computeResults = () => {
         let finaltime = timeGiven - timeSpent[timeSpent.length - 1];
-        modalBody.style.display = 'block';
+        loader2();
+        // modalBody.style.display = 'block';
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
@@ -230,7 +258,7 @@ const computeResults = () => {
         count();
 }
 // assign computeResults function to checkanswersbutton
-checkanswerbutton.addEventListener("click", computeResults);
+checkanswerbutton.addEventListener("click", loader2);
 
 
 // getting data from api
@@ -383,7 +411,7 @@ const thereIsError = () => {
 
 
 const loader = () => {
-        setInterval(() => {
+        let loader = setInterval(() => {
         if(testArea.innerHTML.length > 50 ){  
         inputBox();
         updateTime(error);    
@@ -403,8 +431,17 @@ const loader = () => {
         document.querySelector(".rules").style.display = "none";
         // document.querySelector("#timeUI").style.display = "none";
         }
+
+
+if (markmark === true || markmark2 === true) {
+        clearInterval(loader)
+        document.querySelector("#checkanswer").style.display = "none";
+}
+
 }, 100)
 }
+
+
 
 // submit button
 submitButton.addEventListener("click", () => {
@@ -464,6 +501,8 @@ const markAns  = () => {
         document.querySelector("#startNew").style.display = 'block';
         document.querySelector(".fixed").style.display = 'none';
         clearInterval(loader);
+        clearInterval(loader2);
+        markmark2 = true;
 
 }
 

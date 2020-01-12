@@ -35,20 +35,19 @@ const loader2 = () => {
         modal2.style.display = "block";
         document.querySelector(".centerSticky2").style.display = "block";
         let count = 0;
-        let loader2 = setInterval(() => {
+        let loader3 = setInterval(() => {
         let ttt =  Number(++count)
-        console.log(ttt)
-        if(count === 5) {
-                clearInterval(loader2);
+        if(ttt == 5) {
+                clearInterval(loader3);
                 computeResults();
                 document.querySelector(".modalBody").style.display = "block";
                 modal2.style.display = "none";
         }else if (markmark2 === true) {
-                clearInterval(loader2);   
+                clearInterval(loader3);   
                 document.querySelector(".loader").style.display = "none"; 
-        } else if (count > 5 ) {
+        } else if (ttt > 5 ) {
                 document.querySelector(".modalBody2").style.display = "none";  
-                clearInterval(loader2);
+                clearInterval(loader3);
         }
 
 }, 1000)
@@ -123,9 +122,6 @@ const count = () => {
                                 }
                         }  
                         clickedCount.forEach((item) => {
-                                // console.log(item.innerHTML.split(" ").join(""))
-                                // let itemEach = item.innerHTML.split(" ").join("");
-                                // let corEach = String(correctAns).split(" ").join("");
                                         if(item === String(correctAns).split(" ").join("")) { 
                                                 wrongCorrect.push(item)
                                               
@@ -191,9 +187,7 @@ const timer = (minutes) => {
                         clearInterval(looper)
 
                 } else {
-                        // let timeUI = document.querySelector("#timeUI");
                         let tt = Number(--minutes);
-                        // timeUI.innerHTML = tt;
                         timeSpent.push(tt);
                         numm = tt;
                 }
@@ -248,13 +242,11 @@ const buttonUpdate = () => {
 // calculate results and update UI and other updates
 const computeResults = () => {
         let finaltime = timeGiven - timeSpent[timeSpent.length - 1];
-        loader2();
-        // modalBody.style.display = 'block';
         timespent.innerHTML = 'Time spent: ' + finaltime + " minutes";
         checkForSubmitButtonClicked = true;
         updateCatDiffOnCheckResults();
         document.querySelector(".fixed").style.display = "none";
-        clearInterval(loader); 
+        clearInterval(loader2); 
         count();
 }
 // assign computeResults function to checkanswersbutton
@@ -355,24 +347,20 @@ const testAreaFunction = () => {
                                         <label for=${randomNumForUniqId + item.split("").reverse().join("")} id=${randomNumForUniqId + item.split("").reverse().join("")}>${item}</label>`
                                         testArea.appendChild(li);
                 })
-                // console.log(optionsArray.flat())
         })
 }
 
 // update static Time and set count down minutes parameter
 const updateTime = (error) => {
         if (diffLevel[0] === "easy" && !(error)) {
-                // document.querySelector("#timeUI").innerHTML = 20;
                 timer(20);
                 timeGiven = 20;
                 numberOfQuestions = 15;
         } else if (diffLevel[0] === "medium" && !(error)) {
-                // document.querySelector("#timeUI").innerHTML = 30;
                 timer(30);
                 timeGiven = 30;
                 numberOfQuestions = 30;
         } else if (diffLevel[0] === "hard" && !(error)) {
-                // document.querySelector("#timeUI").innerHTML = 35;
                 timer(35);
                 timeGiven = 35;
                 numberOfQuestions = 45
@@ -381,6 +369,7 @@ const updateTime = (error) => {
 
 // update the input areas
 const inputBox = (error) => {
+        clearInterval(loader)
         if (diffLevel[0] === "easy" && !(error)) {
                 document.querySelector("#category").disabled = true;
                 document.querySelector("#difficulty").disabled = true;
@@ -418,18 +407,15 @@ const loader = () => {
         loadIcon.style.display = 'none';
         testArea.style.display = 'block';
         document.querySelector("#timeSec").style.display = "block";
-        // work on this later, makes the button still on marking page
         document.querySelector("#checkanswer").style.display = "block";
         document.querySelector("#sub").style.display = "none";
         } else if (document.querySelector(".error").innerHTML.length > 10){
                 loadIcon.style.display = 'none';
                 testArea.style.display = 'none';
-                // document.querySelector("#timeUI").style.display = "none";
                 document.querySelector(".error").style.display = "block";
         } else  { 
         loadIcon.style.display = 'block';
         document.querySelector(".rules").style.display = "none";
-        // document.querySelector("#timeUI").style.display = "none";
         }
 
 
